@@ -1,0 +1,70 @@
+input {
+    outline: none;
+}
+
+.active {
+    color: white;
+}
+
+.library::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+/* Track */
+.library::-webkit-scrollbar-track {
+  background: transparent; 
+}
+   
+/* Handle */
+.library::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+  
+/* Handle on hover */
+.library::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+@media (min-width: 640px) {
+
+}
+@media (min-width: 768px) {
+    ul li:hover {
+        border-right: solid #1DB954 4px;
+    }
+    .library button p {
+        font-size: 9.5px;
+        margin-left: 0.55rem;
+    }
+}
+@media (min-width: 950px) {
+    .library button p {
+        font-size: 12px;
+        margin-left: 0.8rem;
+    }
+}
+@media (min-width: 1024px) {
+    ul li:hover {
+        border-right: solid #1DB954 5px;
+        color: #333333a7;
+    }
+    .library button {
+        font-size: 12px;
+    }
+    .library button p {
+        font-size: 12px;
+    }
+    
+}
+@media (min-width: 1135px) {
+    ul li:hover {
+        border-right: solid #1DB954 5px;
+        color: #333333a7;
+    }
+    .library button {
+        font-size: 16px;
+    }
+    .library button p {
+        font-size: 16px;
+    }
+}

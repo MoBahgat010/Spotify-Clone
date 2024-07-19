@@ -1,0 +1,68 @@
+.music-player
+{
+    /* background: rgba(77, 81, 82, 0.43); */
+    /* background: #121212; */
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16.2px);
+    -webkit-backdrop-filter: blur(16.2px);
+    border: 1px solid rgba(77, 81, 82, 0.47);
+}
+.fa-solid
+{
+    transition: 200ms;
+}
+.icon-container:hover .fa-solid
+{
+    visibility: visible;
+    opacity: 1;
+    transition: 200ms;
+}
+#music-progress-bar-input
+{
+    position: absolute;
+    inset: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+} 
+#music-progress-bar-input::-webkit-slider-thumb
+{
+    opacity: 0;
+    visibility: hidden;
+}
+#sound-bar-input
+{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+#sound-bar-input::-webkit-slider-thumb
+{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+@media (min-width: 768px) {
+    #sound-bar-input::-webkit-slider-thumb
+    {
+        width: 9px;
+        height: 9px;
+    }    
+    
+}
+@media (min-width: 1024px) {
+    #sound-bar-input::-webkit-slider-thumb
+    {
+        width: 11px;
+        height: 11px;
+    }    
+}

@@ -1,0 +1,50 @@
+.show-media {
+  height: 95%;
+}
+
+@media (min-width:640px) {
+  .show-media {
+    height: 86.6%;
+  }
+}
+@media (min-width: 768px) {
+  .show-media {
+    height: 86.3%;
+  }    
+}
+@media (min-width: 1024px) {
+  .show-media {
+    height: 86.3%;
+  }    
+}
+
+.main-page::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+.main-page::-webkit-scrollbar-track {
+  background: transparent; 
+}
+   
+/* Handle */
+.main-page::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+  
+/* Handle on hover */
+.main-page::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+@keyframes color {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0 50%;
+    }
+}
