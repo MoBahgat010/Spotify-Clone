@@ -25,7 +25,6 @@ function Login() {
 
     return (
       <section className="h-[100vh] bg-green-900 w-full">
-        <h1 className="bg-red-900 text-[50px]">hhhhhhhhhhhhhhhhhhhhhhhhh</h1>
         <div className="w-full h-full flex flex-col justify-center items-center">
           <img src={TestImage} alt="" />
           <button style={myStyle} className="mt-5 py-2 px-20 border-4 text-[20px] font-bold hover:bg-black hover:text-white duration-300 border-black bg-transparent" onClick={() => {
