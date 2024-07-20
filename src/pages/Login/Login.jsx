@@ -8,7 +8,7 @@ function Login() {
 
     function HandleConnection() {
         const client_id = "0329ae26c3a24ae4a3ad466ec0b1aff7";
-        const redirect_uri = "https://spotify-clone-pearl-nine.vercel.app/home";
+        const redirect_uri = "https://spotify-clone-pearl-nine.vercel.app/dashboard/home";
         const api_uri = "https://accounts.spotify.com/authorize";
         const scope = ['user-read-email', 'user-read-private', 'user-read-playback-state',
           'user-modify-playback-state', 'user-read-currently-playing',
