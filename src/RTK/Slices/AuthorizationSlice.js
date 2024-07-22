@@ -6,6 +6,7 @@ const initialState = {
     UserCountry: null,
     UserName: null,
     UserMail: null,
+    UserId: null,
     UserImage: [{}]
 }
 
@@ -46,6 +47,7 @@ export const AuthorizationSlice = createSlice({
             state.UserCountry = action.payload.response.data.country;
             state.UserMail = action.payload.response.data.email;
             state.UserName = action.payload.response.data.display_name;
+            state.UserId = action.payload.response.data.id
             state.UserImage = action.payload.response.data.images;
         })
     }

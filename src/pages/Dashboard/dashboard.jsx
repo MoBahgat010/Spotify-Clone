@@ -29,8 +29,6 @@ function Dashboard() {
   const VerySmallScreen = useMediaQuery({ query: '(min-width: 640px)' });
   const MediumScreen = useMediaQuery({ query: '(min-width: 768px)' });
   const LargeScreen = useMediaQuery({ query: '(min-width: 1024px)' });
-
- 
   
   useEffect(() => {
     dispatch(GetAccessToken());
