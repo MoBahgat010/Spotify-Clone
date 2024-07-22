@@ -164,7 +164,10 @@ useEffect(() => {
                 props.showImage &&
                 <div className="image-container group relative w-[3rem] h-[3rem] p-[0.2rem] mr-2" onClick={(e) => {
                     e.stopPropagation();
-                    ActivateSong(props.addToPlaylist);
+                    props.addToPlaylist ?
+                        ActivateSong(!props.addToPlaylist)
+                    :
+                        ActivateSong(props.addToPlaylist)
                 }}>
                     <img className="w-full h-full rounded" src={props.image == null ? AlternativeImage : props.image} alt="" />
                     {
