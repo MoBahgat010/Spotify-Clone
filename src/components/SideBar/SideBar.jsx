@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom';
 import LibraryCard from '../LibraryCard';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFollowedArtists, showCreatePlayListComponent } from '../../RTK/Slices/ComponentsSlices';
 import { useMediaQuery } from 'react-responsive';
+import LikedImage from "../../assets/Liked.jpg";
+import LikedSongsCard from '../LikedSongsCard';
 
 function SideBar(props) {
 
+    const { UserId } = useSelector(state => state.Authorization);
     const dispatch = useDispatch();
 
     const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
@@ -28,7 +31,12 @@ function SideBar(props) {
                 'Authorization': 'Bearer ' + props.token,
             }
         })
-        const LibraryData = [...TrackResponse.data.artists.items, ...PlayListResponse.data.items];
+        const UsersPlayList = await axios.get(`https://api.spotify.com/v1/users/${UserId}/playlists`, {
+            headers: {
+                'Authorization': 'Bearer ' + props.token,
+            }
+        })
+        const LibraryData = [...TrackResponse.data.artists.items, ...PlayListResponse.data.items, ...UsersPlayList.data.items];
         let followedArtists = TrackResponse?.data?.artists?.items?.map(item => {
             return item.name;
         })
@@ -100,6 +108,7 @@ function SideBar(props) {
                         }
                     </div>
                     <div className="library-data w-full">
+                        <LikedSongsCard />
                         {
                             libraryData?.map(item => {
                                 return <LibraryCard key={item.id} ItemID={item.id} name={item.name} type={item.type} image={item.images} />

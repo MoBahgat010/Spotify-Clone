@@ -13,6 +13,7 @@ function CreatePlayList(props) {
     const SearchInp = useRef();
     const [searchResult, setSearchResult] = useState([]);
     const PlayListNameInp = useRef();
+    const FormData = useRef();
 
     const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ function CreatePlayList(props) {
 
     async function CreateSpotifyPlayList() {
       // console.log("klkjkjhj");
-      const response = await axios.post(
+      const CreationResponse = await axios.post(
         `https://api.spotify.com/v1/users/${UserId}/playlists`,
         // '{\n    "name": "New Playlist",\n    "description": "New playlist description",\n    "public": false\n}',
         {
@@ -50,6 +51,29 @@ function CreatePlayList(props) {
           }
         }
       );
+      let playListID = CreationResponse.data.id;
+      console.log(playListID);
+      let URIS = addedTracks.map(item => {
+        return item.uri;
+      })
+      URIS.forEach(uri => {
+          axios.post(
+          `https://api.spotify.com/v1/playlists/${playListID}/tracks`,
+          // '{\n    "uris": [\n        "string"\n    ],\n    "position": 0\n}',
+          {
+            'uris': [
+              uri
+            ],
+            'position': 0
+          },
+          {
+            headers: {
+              'Authorization': 'Bearer ' + props.token,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+      });
     }
 
     useEffect(() => {
@@ -70,13 +94,15 @@ function CreatePlayList(props) {
     return (
         <div className="create-playlist z-50 flex justify-center invisible scale-0 items-center absolute inset-0 after:absolute after:content-[''] after:inset-0 after:bg-[#0000007b] after:z-[-1]">
             <div className="create-playlist-card p-4 pb-16 w-[75%] h-[75%] relative flex flex-wrap bg-[#000000c0]">
-              <form className="w-full sm:w-[50%] px-1" onSubmit={(e) => {
-                // e.preventDefault();
-                // e.target.reset();
+              <form ref={FormData} className="w-full sm:w-[50%] px-1" onSubmit={(e) => {
+                e.preventDefault();
+                CreateSpotifyPlayList();
+                e.target.reset();
+                dispatch(hideCreatePlayListComponent());
               }}>
                 <div className="w-full mb-5">
                   <label htmlFor="PlaylistName" className="text-white ml-1">Playlist Name:</label>
-                  <input ref={PlayListNameInp} type="text" id="PlaylistName" className="bg-[#ffffff] w-full mt-3 placeholder:text-black font-semibold pr-28 pl-3 py-3" placeholder="PlayList name" />
+                  <input ref={PlayListNameInp} required  type="text" id="PlaylistName" className="bg-[#ffffff] w-full mt-3 placeholder:text-black font-semibold pr-28 pl-3 py-3" placeholder="PlayList name" />
                 </div>
                 <div className="playlist-default-tracks text-white">
                   <p>PlayList Wanted Tracks</p>
@@ -86,7 +112,8 @@ function CreatePlayList(props) {
                   <div className="show-tracks w-full sm:h-[15rem] h-[8rem] overflow-auto">
                     {
                         searchResult?.map((song, index) => {
-                            return <TrackView key={song.id} addToPlaylist={true} SongId={song.id} showAdd={false} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[1].url} />
+                          console.log(song);
+                            return <TrackView key={song.id} uri={song.uri} addToPlaylist={true} SongId={song.id} showAdd={false} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[1].url} />
                         })  
                     }
                   </div>
@@ -107,7 +134,7 @@ function CreatePlayList(props) {
                 dispatch(hideCreatePlayListComponent());
               }} className="bg-red-700 absolute left-5 bottom-5 text-white px-3 rounded-2xl py-1">Cancel</button>
               <button onClick={() => {
-                CreateSpotifyPlayList();
+                FormData.current.requestSubmit();
               }} className="bg-green-600 absolute right-5 bottom-5 text-white px-3 rounded-2xl py-1">Submit</button>
             </div>
       </div>

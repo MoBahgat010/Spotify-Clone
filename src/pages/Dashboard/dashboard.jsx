@@ -17,6 +17,7 @@ import { useMediaQuery } from "react-responsive";
 import Track from "../../components/Main/Track";
 import Albums from "../../components/Main/Albums";
 import CreatePlayList from "../../components/Main/CreatePlayList";
+import LikedSongsPage from "../../components/Main/LikedSongsPage";
 
 function Dashboard() {
 
@@ -29,6 +30,8 @@ function Dashboard() {
   const VerySmallScreen = useMediaQuery({ query: '(min-width: 640px)' });
   const MediumScreen = useMediaQuery({ query: '(min-width: 768px)' });
   const LargeScreen = useMediaQuery({ query: '(min-width: 1024px)' });
+
+ 
   
   useEffect(() => {
     dispatch(GetAccessToken());
@@ -172,6 +175,7 @@ function Dashboard() {
                   <Route path="artist/:artistID" element={<ArtistPage token={accessToken} />} />   
                   <Route path="album/:albumID" element={<AlbumPage token={accessToken} />} />
                   <Route path="playlist/:playlistID" element={<PlayListPage token={accessToken} />} />
+                  <Route path="likedsongs" element={<LikedSongsPage token={accessToken} />} />
                 </Routes>
               </div>
               <Info />
