@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { hideCreatePlayListComponent } from "../../RTK/Slices/ComponentsSlices";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function CreatePlayList(props) {
 
@@ -98,6 +99,13 @@ function CreatePlayList(props) {
                 e.preventDefault();
                 CreateSpotifyPlayList();
                 e.target.reset();
+                toast.success("Playlist has been added successfully, refresh to see it", {
+                  autoClose: 2000,
+                  style: {
+                      background: 'green',
+                      color: '#fff',
+                  }
+                });
                 dispatch(hideCreatePlayListComponent());
               }}>
                 <div className="w-full mb-5">
