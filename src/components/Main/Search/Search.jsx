@@ -5,7 +5,7 @@ import { HideInfoComponent, ShowInfoComponent } from "../../../RTK/Slices/Compon
 import './Search.css'
 import { Link } from "react-router-dom";
 import TopResults from "../../TopResults";
-import TrackView from "../../TrackView";
+import TrackView from "../../TrackView/TrackView";
 import ArtistsCards from "../../ArtistCard";
 import axios from "axios";
 import PlayListCard from "../../PlayListCard";
@@ -131,9 +131,9 @@ function Search(props) {
                         </div>
                         <div className="inner-container">   
                             {
-                                searchResult?.tracks?.items.slice(0,4).map((song) => {
+                                searchResult?.tracks?.items.slice(0,4).map((song, index) => {
                                     console.log(song);
-                                    return <TrackView key={song.id} SongId={song.id} showAdd={true} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[1].url} />
+                                    return <TrackView key={song.id} addToPlaylist={false} SongId={song.id} showAdd={true} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[1].url} />
                                 })  
                             }
                         </div>

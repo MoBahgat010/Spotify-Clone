@@ -4,7 +4,6 @@ import Main from "../../components/Main/Search/Search";
 import MusicPlayer from "../../components/MusicPlayer/MusicPlayer";
 import SideBar from "../../components/SideBar/SideBar";
 import './dashboard.css'
-import axios from "axios";
 import Search from "../../components/Main/Search/Search";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,21 +16,21 @@ import Home from "../../components/Main/Home/Home";
 import { useMediaQuery } from "react-responsive";
 import Track from "../../components/Main/Track";
 import Albums from "../../components/Main/Albums";
+import CreatePlayList from "../../components/Main/CreatePlayList";
 
 function Dashboard() {
 
   const { MediaComponent } = useSelector(state => state.Dahboardlayout);
   const { accessToken, UserName, UserImage, UserMail, UserCountry } = useSelector(state => state.Authorization);
   const UpperPage = useRef();
+  
   const dispatch = useDispatch();
 
   const VerySmallScreen = useMediaQuery({ query: '(min-width: 640px)' });
   const MediumScreen = useMediaQuery({ query: '(min-width: 768px)' });
   const LargeScreen = useMediaQuery({ query: '(min-width: 1024px)' });
 
-  function LayoutHandling() {
-    
-  }
+ 
   
   useEffect(() => {
     dispatch(GetAccessToken());
@@ -158,7 +157,8 @@ function Dashboard() {
 
     
   return (
-        <div className='bg-black w-full h-[100vh] p-1'>
+        <div className='bg-black w-full h-[100dvh] p-1'>
+          <CreatePlayList token={accessToken} />
           <div className="w-full dashboard h-full">
             <div ref={UpperPage} className='upper-page w-full h-full pb-1 flex'>
               {/* <button className="bg-white" onClick={() => {

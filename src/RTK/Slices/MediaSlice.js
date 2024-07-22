@@ -85,7 +85,10 @@ export const MediaSlice = createSlice({
             console.log(action.payload);
             console.log(action.payload != null);
             if(action.payload != null)  
-                state.isSongPlaying = true
+                if(state.currentSongID == action.payload) 
+                    state.isSongPlaying = !state.isSongPlaying;
+                else
+                    state.isSongPlaying = true;
             else
                 state.isSongPlaying = false
             state.currentSongID = action.payload;

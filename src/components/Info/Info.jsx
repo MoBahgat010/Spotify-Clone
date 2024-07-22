@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Info.css"
 import { HideInfoComponent } from "../../RTK/Slices/ComponentsSlices";
-import TrackView from "../TrackView";
+import TrackView from "../TrackView/TrackView";
 import ArtistsCards from "../ArtistCard";
 import AlbumCard from "../AlbumCard";
 import PlayListCard from "../PlayListCard";
@@ -24,11 +24,11 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All Track</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             {
                                 infoComponentData.map((song , index) => {
-                                    return <TrackView key={index} SongId={song.id} showAdd={true} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[2].url} />
+                                    return <TrackView key={index} addToPlaylist={false} SongId={song.id} showAdd={true} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showImage={true} showDuration={true} image={song.album.images[2].url} />
                                 })
                             }
                         </>
@@ -38,7 +38,7 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All Artists</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1">
                                 {
@@ -54,7 +54,7 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All Albums</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1">
                                 {
@@ -70,7 +70,7 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All Playlists</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1">
                                 {
@@ -86,7 +86,7 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All Episodes</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1">
                                 {
@@ -102,7 +102,7 @@ function Info() {
                         <>
                             <div className="flex items-center">
                                 <p className="text-white mr-auto text-[27px] font-bold mb-2">All PodCasts</p>
-                                <i class="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
+                                <i className="fa-solid fa-x text-[#A3A3A3] cursor-pointer mb-2 mr-2" onClick={() => dispatch(HideInfoComponent())}></i>
                             </div>
                             <div className="grid lg:grid-cols-2 grid-cols-1">
                                 {

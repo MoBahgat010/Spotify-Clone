@@ -37,6 +37,46 @@
   background: #555; 
 }
 
+.show-tracks::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+.show-tracks::-webkit-scrollbar-track {
+  background: transparent; 
+}
+   
+/* Handle */
+.show-tracks::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+  
+/* Handle on hover */
+.show-tracks::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.playlist-added-tracks::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+/* Track */
+.playlist-added-tracks::-webkit-scrollbar-track {
+  background: transparent; 
+}
+   
+/* Handle */
+.playlist-added-tracks::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+  
+/* Handle on hover */
+.playlist-added-tracks::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+
 @keyframes color {
     0% {
         background-position: 0 50%;

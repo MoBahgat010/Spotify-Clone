@@ -2,12 +2,13 @@ import { Link, useParams } from "react-router-dom";
 import TestImage from "../../../assets/Eminem.jpg"
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import TrackView from "../../TrackView";
+import TrackView from "../../TrackView/TrackView";
 import ALternativeImage from "../../../assets/Spotify.svg"
 import { fetchSongData, setCurrenSongID, setSongListToPlay } from "../../../RTK/Slices/MediaSlice";
 import { ShowMediaComponent } from "../../../RTK/Slices/ComponentsSlices";
 import { useDispatch, useSelector } from "react-redux";
 import gsap from "gsap";
+import toast from "react-hot-toast";
 
 function PlayListPage(props) {
 
@@ -51,6 +52,13 @@ function PlayListPage(props) {
             scale: 1,
             duration: 0.5,
         },'<')
+        toast.success("Playlist added successfully", {
+            autoClose: 2000,
+            style: {
+                background: 'green',
+                color: '#fff',
+            }
+        });
         setIsAddedToLibrary(true);
     }
     
@@ -70,6 +78,13 @@ function PlayListPage(props) {
             scale: 1,
             duration: 0.5
         })
+        toast.success("Playlist removed successfully", {
+            autoClose: 2000,
+            style: {
+                background: 'green',
+                color: '#fff',
+            }
+        });
         setIsAddedToLibrary(false);
     }
 
@@ -186,10 +201,10 @@ function PlayListPage(props) {
                     </button>
                     <button className="add-to-library ml-10  md:w-[2rem] w-[1.5rem] md:h-[2rem] h-[1.5rem] relative hover:scale-105 duration-300 group" onClick={() => { isAddedToLibrary ? RemoveAlbumFromLibrary() : AddAlbumToLibrary() }}>
                         <div ref={ToAddAlbum} className="to-add  rounded-full absolute inset-0 border-2 bg-transparent border-[#ADADAD] group-hover:border-white text-[#ADADAD]">
-                            <i class="fa-solid fa-plus text-[#ADADAD] p-0 m-0 group-hover:text-[#fff] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                            <i className="fa-solid fa-plus text-[#ADADAD] p-0 m-0 group-hover:text-[#fff] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
                         </div>
                         <div ref={AddedAlbum} className="added scale-0 rounded-full absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] p-4 inset-0 hover:scale-105 duration-300 bg-green-700">
-                            <i class="fa-solid text-black fa-check p-0 m-0 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                            <i className="fa-solid text-black fa-check p-0 m-0 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
                         </div>
                     </button>
                 </div>
@@ -200,8 +215,7 @@ function PlayListPage(props) {
                             <th className="text-start w-[10%] sm:w-[35%] md:w-[45%] text-[12px] md:text-[16px]">Title</th>
                             <th className="text-start w-[10%] sm:w-[20%] md:w-[30%] text-[10px] sm:text-[12px] md:text-[16px]">Album</th>
                             <th className="text-start w-[15%] md:w-fit text-[10px] sm:text-[12px] md:text-[16px]"><p className="line-clamp-1">Date added</p></th>
-                            <th className="invisible w-[2rem] hidden sm:block"></th>
-                            <th className="w-[2rem] sm:w-[3rem] md:w-[4rem]"><i class="fa-regular fa-clock text-[10px] md:text-[16px]"></i></th>
+                            <th className="w-[2rem] sm:w-[3rem] md:w-[4rem]"><i className="fa-regular fa-clock text-[10px] md:text-[16px]"></i></th>
                         </thead>
                         <tbody>
                             {
@@ -223,13 +237,10 @@ function PlayListPage(props) {
                                                 }
                                             </td>
                                             <td key={item.track.id} className="w-[5rem] sm:w-[35%] md:w-[45%]">
-                                                <TrackView key={item.track?.id} showAdd={false} SongId={item.track?.id} name={item.track?.name} duration={item.track?.duration_ms / 1000} explicitMode={item.track?.explicit} artistName={item.track?.artists} showDuration={false} showImage={false} image={item.track?.image}/>
+                                                <TrackView key={item.track?.id} addToPlaylist={false} showAdd={false} SongId={item.track?.id} name={item.track?.name} duration={item.track?.duration_ms / 1000} explicitMode={item.track?.explicit} artistName={item.track?.artists} showDuration={false} showImage={false} image={item.track?.image}/>
                                             </td>
                                             <td className="text-[#ADADAD] pr-5 "><Link to={`/dashboard/album/${item.track?.album?.id}`} className="hover:underline line-clamp-1 text-[10px] sm:text-[12px] md:text-[14px]">{item.track.album.name}</Link></td>
                                             <td className="text-[#ADADAD]"><p className="line-clamp-1 text-[10px] sm:text-[12px] md:text-[16px]">{item.track.album.release_date}</p></td>
-                                            <td className="text-center hidden sm:table-cell">
-                                                <span className="relative hover:cursor-pointer text-white scale-90 sm:scale-95 md:scale-100  after:absolute after:content-[''] after:top-[50%] after:left-[50%] after:w-[20px] after:h-[20px] after:translate-x-[-50%] after:translate-y-[-40%] after:invisible invisible group-hover:visible group-hover:after:visible after:bg-transparent after:border-2 after:border-[#ADADAD] after:rounded-full">+</span>
-                                            </td>
                                             <td key={item.track.id} className="text-[#ADADAD] text-[10px] sm:text-[12px] md:text-[16px] text-center">
                                                 {TimeStd(item.track.duration_ms / 1000)}
                                             </td>

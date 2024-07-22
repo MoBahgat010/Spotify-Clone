@@ -2,7 +2,7 @@ import axios from "axios";
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import TrackView from "../../TrackView";
+import TrackView from "../../TrackView/TrackView";
 import AlbumCard from "../../AlbumCard";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "./AlbumPage.css"
@@ -172,10 +172,10 @@ function AlbumPage(props) {
                     </button>
                     <button className="add-to-library ml-10  md:w-[2rem] w-[1.5rem] md:h-[2rem] h-[1.5rem] relative hover:scale-105 duration-300 group" onClick={() => { isAddedToLibrary ? RemoveAlbumFromLibrary() : AddAlbumToLibrary() }}>
                         <div ref={ToAddAlbum} className="to-add  rounded-full absolute inset-0 border-2 bg-transparent border-[#ADADAD] group-hover:border-white text-[#ADADAD]">
-                            <i class="fa-solid fa-plus text-[#ADADAD] p-0 m-0 group-hover:text-[#fff] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                            <i className="fa-solid fa-plus text-[#ADADAD] p-0 m-0 group-hover:text-[#fff] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
                         </div>
                         <div ref={AddedAlbum} className="added scale-0 rounded-full absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] p-4 inset-0 hover:scale-105 duration-300 bg-green-700">
-                            <i class="fa-solid text-black fa-check p-0 m-0 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
+                            <i className="fa-solid text-black fa-check p-0 m-0 absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"></i>
                         </div>
                     </button>
                 </div>
@@ -184,7 +184,7 @@ function AlbumPage(props) {
                         <thead className="text-white h-[3rem] border-b-2 border-[#393939]">
                             <th className=" w-[3rem] text-center">#</th>
                             <th className="text-start">Title</th>
-                            <th className="w-[4rem]"><i class="fa-regular fa-clock"></i></th>
+                            <th className="w-[4rem]"><i className="fa-regular fa-clock"></i></th>
                         </thead>
                         <tbody>
                             {
@@ -206,7 +206,7 @@ function AlbumPage(props) {
                                                 }
                                             </td>
                                             <td>
-                                                <TrackView key={song.id} showAdd={true} SongId={song.id} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showDuration={false} showImage={false} image={song.image}/>
+                                                <TrackView key={song.id} addToPlaylist={false} showAdd={true} SongId={song.id} name={song.name} duration={song.duration_ms / 1000} explicitMode={song.explicit} artistName={song.artists} showDuration={false} showImage={false} image={song.image}/>
                                             </td>
                                             <td className="text-[#ADADAD] text-center">{TimeStd(song.duration_ms / 1000)}</td>
                                         </tr>

@@ -1,0 +1,41 @@
+.track-saved {
+    /* animation-name: Save;
+    animation-duration: 500ms;
+    animation-delay: 0;
+    animation-iteration-count: 1; */
+    opacity: 1 !important;
+    display: block;
+    transform: scale(1) !important;
+}
+
+.track-unsaved {
+    /* animation-name: UnSave;
+    animation-duration: 500ms;
+    animation-delay: 0;
+    animation-iteration-count: 1; */
+    opacity: 0 !important;
+    display: none;
+    transform: scale(0) !important;
+}
+
+.added-tracks-to-playlist {
+    background-color: rgba(17, 124, 17, 0.593) !important;
+}
+
+@keyframes UnSave {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 0;
+    }
+}
+
+@keyframes Save {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
+    }
+}

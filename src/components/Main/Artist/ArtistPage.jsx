@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import TrackView from "../../TrackView"
+import TrackView from "../../TrackView/TrackView"
 import ArtistsCards from "../../ArtistCard"
 import AlbumCard from "../../AlbumCard"
 import "./ArtistPage.css"
@@ -28,7 +28,6 @@ function ArtistPage(props) {
         backgroundImage: `url('${artistImage}')`
     }
     
-    
     function NumberStd(passed_number) {
         return passed_number.toLocaleString();
     }
@@ -50,7 +49,13 @@ function ArtistPage(props) {
                 ]
             }
         });
-        console.log(response);
+        toast.success(`${artistName} has been unfollowed successfully`, {
+            autoClose: 2000,
+            style: {
+                background: 'green',
+                color: '#fff',
+            }
+        });
         setIsFollowed(false);
     }
     
@@ -73,7 +78,13 @@ function ArtistPage(props) {
                 }
             }
         );
-        // console.log(response);
+        toast.success(`${artistName} has been followed successfully`, {
+            autoClose: 2000,
+            style: {
+                background: 'green',
+                color: '#fff',
+            }
+        });
         setIsFollowed(true);
     }
     
@@ -150,7 +161,7 @@ function ArtistPage(props) {
                     <p className="text-white text-[30px] font-bold mb-5">Popular Tracks</p>
                     {
                         tracks?.slice(0, showedTracks < tracks.length ? showedTracks : tracks.length).map((track, index) => {
-                            return <TrackView key={track.id} showAdd={true} showDuration={true} SongId={track.id} name={track.name} duration={track.duration_ms / 1000} explicitMode={track.explicit} artistName={track.artists} showImage={true} image={track.album.images[1].url} />
+                            return <TrackView key={track.id} addToPlaylist={false} showAdd={true} showDuration={true} SongId={track.id} name={track.name} duration={track.duration_ms / 1000} explicitMode={track.explicit} artistName={track.artists} showImage={true} image={track.album.images[1].url} />
                         })  
                     }
                     {

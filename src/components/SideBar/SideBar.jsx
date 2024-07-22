@@ -6,8 +6,16 @@ import { Link } from 'react-router-dom';
 import LibraryCard from '../LibraryCard';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setFollowedArtists, showCreatePlayListComponent } from '../../RTK/Slices/ComponentsSlices';
+import { useMediaQuery } from 'react-responsive';
 
 function SideBar(props) {
+
+    const dispatch = useDispatch();
+
+    const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
+
     const [libraryData, setLibraryData] = useState([]);
     async function GetUserLibraryData() {
         const TrackResponse = await axios.get("https://api.spotify.com/v1/me/following?type=artist&limit=50",{
@@ -21,6 +29,10 @@ function SideBar(props) {
             }
         })
         const LibraryData = [...TrackResponse.data.artists.items, ...PlayListResponse.data.items];
+        let followedArtists = TrackResponse?.data?.artists?.items?.map(item => {
+            return item.name;
+        })
+        dispatch(setFollowedArtists(followedArtists))
         setLibraryData(LibraryData);
     }
     useEffect(() => {
@@ -76,7 +88,17 @@ function SideBar(props) {
                             <p className='hidden text-[#ADADAD] lg:text-[14px] md:text-[12px] font-bold md:ml-5 md:inline group-hover:text-white'>Your Library</p>
                         </button>
                     </div>
-                    {/* <button className='hover:text-[#ADADAD] text-black duration-300 w-full rounded-3xl py-1 md:my-2 my-1 lg:text-[16px] md:text-[13px] sm:text-[10px] text-[8px] items-center hover:bg-transparent bg-white border-2 border-white'>Add Playlist</button> */}
+                    <div className='w-full relative h-[2rem] sm:h-fit cursor-pointer' onClick={() => {
+                        dispatch(showCreatePlayListComponent());
+                    }} >
+                        {
+                            isSmallScreen
+                            ?
+                                <p className='text-white absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-[30px]'>+</p>
+                            :
+                                <button className='hover:text-[#ADADAD] text-black duration-300 w-full rounded-3xl py-1 md:my-2 my-1 lg:text-[16px] md:text-[13px] sm:text-[10px] text-[8px] items-center hover:bg-transparent bg-white border-2 border-white'>Add Playlist</button>
+                        }
+                    </div>
                     <div className="library-data w-full">
                         {
                             libraryData?.map(item => {

@@ -18,6 +18,14 @@
     opacity: 1;
     transition: 200ms;
 }
+.icon-container-deactive {
+    visibility: none;
+    opacity: 0;
+}
+.icon-container-active {
+    visibility: visible;
+    opacity: 1;
+}
 #music-progress-bar-input
 {
     position: absolute;
