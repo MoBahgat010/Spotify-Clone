@@ -34,8 +34,9 @@ function CreatePlayList(props) {
     }
 
     async function CreateSpotifyPlayList() {
+      // console.log("klkjkjhj");
       const response = await axios.post(
-        'https://api.spotify.com/v1/users/smedjan/playlists',
+        `https://api.spotify.com/v1/users/${UserId}/playlists`,
         // '{\n    "name": "New Playlist",\n    "description": "New playlist description",\n    "public": false\n}',
         {
           'name': PlayListNameInp.current.value,
@@ -106,8 +107,7 @@ function CreatePlayList(props) {
                 dispatch(hideCreatePlayListComponent());
               }} className="bg-red-700 absolute left-5 bottom-5 text-white px-3 rounded-2xl py-1">Cancel</button>
               <button onClick={() => {
-                console.log("klkjkjhj");
-                // CreateSpotifyPlayList();
+                CreateSpotifyPlayList();
               }} className="bg-green-600 absolute right-5 bottom-5 text-white px-3 rounded-2xl py-1">Submit</button>
             </div>
       </div>
