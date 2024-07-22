@@ -31,12 +31,12 @@ function SideBar(props) {
                 'Authorization': 'Bearer ' + props.token,
             }
         })
-        const UsersPlayList = await axios.get(`https://api.spotify.com/v1/users/${UserId}/playlists`, {
-            headers: {
-                'Authorization': 'Bearer ' + props.token,
-            }
-        })
-        const LibraryData = [...TrackResponse.data.artists.items, ...PlayListResponse.data.items, ...UsersPlayList.data.items];
+        // const UsersPlayList = await axios.get(`https://api.spotify.com/v1/users/${UserId}/playlists`, {
+        //     headers: {
+        //         'Authorization': 'Bearer ' + props.token,
+        //     }
+        // })
+        const LibraryData = [...TrackResponse.data.artists.items, ...PlayListResponse.data.items];
         let followedArtists = TrackResponse?.data?.artists?.items?.map(item => {
             return item.name;
         })
