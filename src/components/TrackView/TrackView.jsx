@@ -103,7 +103,7 @@ function TrackView(props) {
                 background: 'green',
                 color: '#fff',
             }
-        })
+        });
         setIsTrackSaved(false);
     }
 
